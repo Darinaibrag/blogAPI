@@ -24,8 +24,6 @@ urlpatterns = [
 ]
 # localhost:8000/account/register
 
-
-
 # localhost:8000/admin
 
 
