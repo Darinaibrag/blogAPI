@@ -39,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'dj_rest_auth',
 
     # myapps
     'account',
-    'todo_app'
+    'todo_app',
+    'category'
 ]
 
 MIDDLEWARE = [
