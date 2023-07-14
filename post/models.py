@@ -1,6 +1,7 @@
 from django.db import models
 from category.models import Category
 
+
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=255, unique=True)
@@ -16,6 +17,7 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['created_at']
+
 
 class PostImages(models.Model):
     title = models.CharField(max_length=100, blank=True)

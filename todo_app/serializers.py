@@ -9,7 +9,9 @@ class CategorysSerializer(serializers.ModelSerializer):
 
 
 class TodoSerializer(serializers.ModelSerializer):
-    # category = CategorySerializer()
+
+    owner_username = serializers.ReadOnlyField(source='owner.username')
+    category_name = serializers.ReadOnlyField(source='category.name')
     class Meta:
         model = Todo
         fields = '__all__'
