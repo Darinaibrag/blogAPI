@@ -4,6 +4,10 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from dj_rest_auth.views import LoginView, LogoutView
 from . import views
 from rest_framework.routers import DefaultRouter
+from drf_yasg import openapi
+
+
+
 
 router = DefaultRouter()
 router.register('', views.UserViewSet)

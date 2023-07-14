@@ -1,5 +1,12 @@
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
 
-urlpatterns = [path('', views.PostListCreateView.as_view()),
-               path('<int:id>/', views.PostDetailView.as_view())]
+router = DefaultRouter()
+router.register('', views.PostViewSet)
+
+urlpatterns = [
+    path('', include(router.urls))
+    # path('', views.PostListCreateView.as_view()),
+    # path('<int:id>/', views.PostDetailView.as_view())
+]

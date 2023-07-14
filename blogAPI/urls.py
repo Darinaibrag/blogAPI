@@ -14,17 +14,32 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import openapi as openapi
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Python 29 API",
+        description="makers bootcamp",
+        default_version="v1",
+    ),
+    public=True
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
+    path('docs/', schema_view.with_ui('swagger')),
     path('todo_app/', include('todo_app.urls')),
     path('category/', include('category.urls')),
-    path('post/', include('post.urls'))
+    path('post/', include('post.urls')),
+    path('like/', include('like.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
