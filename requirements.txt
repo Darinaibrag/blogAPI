@@ -7,3 +7,5 @@ sqlparse==0.4.4
 typing_extensions==4.7.1
 python-decouple==3.8
 dj-rest-auth
+pillow
+drf_yasg

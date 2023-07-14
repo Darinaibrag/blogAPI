@@ -16,12 +16,14 @@ class UserRegistration(APIView):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response('Аккаунт успешно создан',status=200)
+        return Response('Аккаунт успешно создан', status=200)
+
 
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserListSerializer
     permission_classes = [IsAuthenticated]
+
 
 class LoginView(ObtainAuthToken):
     serializer_class = LoginSerializer
@@ -36,12 +38,15 @@ class LoginView(ObtainAuthToken):
 
         return Response(response_data)
 
+
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
+
     def post(self, request):
         user = request.user
         Token.objects.filter(user=user).delete()
         return Response('Вы вышли со своего аккаунта')
+
 
 class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
@@ -49,8 +54,10 @@ class UserDetailView(generics.RetrieveAPIView):
     lookup_field = 'id'
     permission_classes = [IsAdminUser]
 
+
 class CustomViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, GenericViewSet):
     pass
+
 
 class UserViewSet(CustomViewSet):
     queryset = User.objects.all()
