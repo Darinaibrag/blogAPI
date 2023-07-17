@@ -6,9 +6,6 @@ from . import views
 from rest_framework.routers import DefaultRouter
 from drf_yasg import openapi
 
-
-
-
 router = DefaultRouter()
 router.register('', views.UserViewSet)
 
@@ -23,6 +20,5 @@ urlpatterns = [
     # path('login/', views.LoginView.as_view()),
     # path('logout/', views.LogoutView.as_view())
 ]
-
 
 # http://127.0.0.1:8000/account/register/

@@ -1,6 +1,7 @@
-from rest_framework import viewsets, permissions
-from .models import Category, Todo
-from .serializers import CategorysSerializer, TodoSerializer
+from rest_framework import viewsets, permissions, generics
+
+from .models import Category, Todo, Comment
+from .serializers import CategorysSerializer, TodoSerializer, CommentSerializer
 from .permissions import IsAuthor
 from rest_framework.viewsets import ModelViewSet
 
@@ -24,3 +25,16 @@ class TodoViewSet(viewsets.ModelViewSet):
             return [permissions.IsAuthenticated(), IsAuthor()]
         return [permissions.IsAuthenticatedOrReadOnly(), ]
 
+
+class CommentCreateView(generics.CreateAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    lookup_field = 'id'

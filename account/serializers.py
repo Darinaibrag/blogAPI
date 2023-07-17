@@ -1,12 +1,13 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from django.contrib.auth import authenticate
+
+
 class RegisterSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
     password = serializers.CharField(min_length=8, write_only=True, required=True)
     password_confirmation = serializers.CharField(min_length=8, write_only=True, required=True)
-
 
     class Meta:
         model = User
@@ -26,15 +27,18 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'last_name')
 
+
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         exclude = ('password',)
+
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
